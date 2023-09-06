@@ -11,8 +11,12 @@ class CalculadoraIMCApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Calculadora de IMC'),
+          centerTitle: true, // Centraliza o título
         ),
-        body: CalculadoraIMC(),
+        backgroundColor: Colors.grey, // Define a cor de fundo
+        body: Center(
+          child: CalculadoraIMC(),
+        ),
       ),
     );
   }
@@ -31,30 +35,41 @@ class _CalculadoraIMCState extends State<CalculadoraIMC> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          TextField(
-            controller: pesoController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Peso (kg)'),
-          ),
-          TextField(
-            controller: alturaController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Altura (m)'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              calcularIMC();
-            },
-            child: Text('Calcular IMC'),
-          ),
-          Text(
-            resultado,
-            style: TextStyle(fontSize: 20.0),
-          ),
-        ],
+      child: Container(
+        padding: EdgeInsets.all(200.0), // Define o espaço ao redor do ListView
+        child: ListView(
+          children: <Widget>[
+            Center(
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    controller: pesoController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(labelText: 'Peso (kg)'),
+                  ),
+                  TextField(
+                    controller: alturaController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(labelText: 'Altura (m)'),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20.0), // Adiciona um espaço entre a entrada de dados e o botão
+            ElevatedButton(
+              onPressed: () {
+                calcularIMC();
+              },
+              child: Text('Calcular IMC'),
+            ),
+            SizedBox(height: 20.0), // Adiciona um espaço entre o botão e o resultado
+            Text(
+              resultado,
+              style: TextStyle(fontSize: 20.0),
+              textAlign: TextAlign.center, // Centraliza o texto do resultado
+            ),
+          ],
+        ),
       ),
     );
   }
